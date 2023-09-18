@@ -1,6 +1,8 @@
 import os
 import struct
 import numpy as np
+import pickle
+from nueralnet import NeuralNetMLP
 
 def load_mnist(path, kind='train'):
     labels_path = os.path.join(path, '%s-labels-idx1-ubyte' % kind)
@@ -33,3 +35,24 @@ else:
     
 print('행 %d, 열: %d' % (X_train.shape[0], X_train.shape[1]))
 print('행 %d, 열: %d' % (X_test.shape[0], X_test.shape[1]))
+
+if os.path.exists('model/nn.pickle'):
+    with open('model/nn.pickle', 'rb') as f:
+        pickle.load(f)
+else:
+    nn = NeuralNetMLP(n_hidden=100,
+                    l2=0.01,
+                    epochs=200,
+                    eta=0.0005,
+                    minibatch_size=100,
+                    shuffle=True,
+                    seed=1
+                    )
+    nn.fit(X_train=X_train[:55000],
+        y_train=y_train[:55000],
+        X_valid=X_train[55000:],
+        y_valid=y_train[55000:]
+        )
+    with open('nn.pickle', 'wb') as f:
+        pickle.dump(nn, f)
+
