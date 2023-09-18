@@ -55,4 +55,3 @@ else:
         )
     with open('model/nn.pickle', 'wb') as f:
         pickle.dump(nn, f)
-

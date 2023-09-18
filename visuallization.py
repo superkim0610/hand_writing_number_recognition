@@ -1,6 +1,7 @@
 from main import X_train, y_train, X_test, y_test, nn
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 def show_mnist_data():
     fig, ax = plt.subplots(nrows=2, ncols=5, sharex=True, sharey=True)
@@ -66,7 +67,9 @@ def show_user_img():
     x = np.array([a, a, a] + [m for _ in range(22)] + [a, a, a])
     _x = x.flatten()
     print(x.shape)
+    t1 = time.time()
     print(nn.predict([_x])) # nn.predict([data, data, ...]), data.shape = (784,)
+    print('predicting time : %d' % (time.time() - t1))
     plt.imshow(x, cmap='Greys')
     plt.show()
 
