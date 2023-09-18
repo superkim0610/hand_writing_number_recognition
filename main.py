@@ -38,7 +38,7 @@ print('행 %d, 열: %d' % (X_test.shape[0], X_test.shape[1]))
 
 if os.path.exists('model/nn.pickle'):
     with open('model/nn.pickle', 'rb') as f:
-        pickle.load(f)
+        nn = pickle.load(f)
 else:
     nn = NeuralNetMLP(n_hidden=100,
                     l2=0.01,
