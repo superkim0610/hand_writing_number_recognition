@@ -30,7 +30,7 @@ def show_accuracy():
 
 def show_test_predict():
     y_test_pred = nn.predict(X_test)
-    acc = (np.sum(y_test == y_test_pred))
+    acc = (np.sum(y_test == y_test_pred).astype(np.float64) / X_test.shape[0])
     print('테스트 정확도: %.2f%%' % (acc * 100))
 
     miscl_img = X_test[y_test != y_test_pred][:25]
@@ -51,4 +51,25 @@ def show_test_predict():
                      )
         ax[i].set_title('%d) t: %d p: %d' % (i+1, correct_lab[i], miscl_lab[i]))
 
-show_accuracy()
+    ax[0].set_xticks([])
+    ax[0].set_yticks([])
+    plt.tight_layout()
+    plt.show()
+
+def show_user_img():
+    a = [-1. for _ in range(28)]
+    l = [1., 1., 1.] + [-1. for _ in range(25)]
+    r = [-1. for _ in range(25)] + [1., 1., 1.]
+    m = [-1. for _ in range(12)] + [1., 1., 1., 1.] + [-1. for _ in range(12)]
+
+    # x = np.array([l, l, l] + [a for _ in range(22)] + [r, r, r])
+    x = np.array([a, a, a] + [m for _ in range(22)] + [a, a, a])
+    _x = x.flatten()
+    print(x.shape)
+    print(nn.predict([_x])) # nn.predict([data, data, ...]), data.shape = (784,)
+    plt.imshow(x, cmap='Greys')
+    plt.show()
+
+# show_accuracy()
+# show_test_predict()
+show_user_img()
