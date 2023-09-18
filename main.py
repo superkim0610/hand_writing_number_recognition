@@ -19,3 +19,6 @@ def load_mnist(path, kind='train'):
 
 X_train, y_train = load_mnist('data/', kind='train')
 print('행 %d, 열: %d' % (X_train.shape[0], X_train.shape[1]))
+
+X_test, y_test = load_mnist('data/', kind='t10k')
+print('행 %d, 열: %d' % (X_test.shape[0], X_test.shape[1]))
