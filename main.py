@@ -17,8 +17,19 @@ def load_mnist(path, kind='train'):
 
     return images, labels
 
-X_train, y_train = load_mnist('data/', kind='train')
-print('행 %d, 열: %d' % (X_train.shape[0], X_train.shape[1]))
+if os.path.exists('data/mnist_scaled.npz'):
+    mnist = np.load('data/mnist_scaled.npz')
+    X_train, y_train, X_test, y_test = [mnist[f] for f in mnist.files]
+else:
+    X_train, y_train = load_mnist('data/', kind='train')
+    X_test, y_test = load_mnist('data/', kind='t10k')
 
-X_test, y_test = load_mnist('data/', kind='t10k')
+    np.savez_compressed('data/mnist_scaled.npz',
+                        X_train=X_train,
+                        y_train=y_train,
+                        X_test=X_test,
+                        y_test=y_test
+                        )
+    
+print('행 %d, 열: %d' % (X_train.shape[0], X_train.shape[1]))
 print('행 %d, 열: %d' % (X_test.shape[0], X_test.shape[1]))
