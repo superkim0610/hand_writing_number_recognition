@@ -48,6 +48,29 @@
             sendCanvasData()
         });
 
+        // touch event added
+        // 터치 시작 이벤트 핸들러
+        canvas.addEventListener('touchstart', function (e) {
+            isDrawing = true;
+            var touch = e.touches[0]; // 첫 번째 터치 지점을 사용
+            context.beginPath();
+            context.moveTo(touch.clientX - canvas.getBoundingClientRect().left, touch.clientY - canvas.getBoundingClientRect().top);
+        });
+
+        // 터치 이동 이벤트 핸들러
+        canvas.addEventListener('touchmove', function (e) {
+            if (!isDrawing) return;
+            var touch = e.touches[0]; // 첫 번째 터치 지점을 사용
+            context.lineTo(touch.clientX - canvas.getBoundingClientRect().left, touch.clientY - canvas.getBoundingClientRect().top);
+            context.stroke();
+        });
+
+        // 터치 종료 이벤트 핸들러
+        canvas.addEventListener('touchend', function () {
+            isDrawing = false;
+            sendCanvasData();
+        });
+
         // 캔버스 데이터 전송
         function sendCanvasData() {
             var imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
