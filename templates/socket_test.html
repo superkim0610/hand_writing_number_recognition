@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('message', function(data) {
+            var li = document.createElement('li');
+            li.innerHTML = data;
+            document.getElementById('message-list').appendChild(li);
+        });
+
+        function sendMessage() {
+            var message = document.getElementById('message-input').value;
+            socket.emit('message', message);
+            document.getElementById('message-input').value = '';
+        }
+    </script>
+</head>
+<body>
+    <ul id="message-list"></ul>
+    <input type="text" id="message-input" placeholder="Enter a message">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>
