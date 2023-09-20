@@ -25,4 +25,4 @@ def handle_canvas_data(canvas_data):
     socketio.emit('number', {'number': result})
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True, host='0.0.0.0', port=80)
