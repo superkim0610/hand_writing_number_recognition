@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from subprocess import call
 from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
 socket_io = SocketIO(app)
 
+active_users = {}
 
 @app.route('/')
 def hello_world():
@@ -21,8 +22,11 @@ def socket_test():
 
 @socket_io.on('message')
 def handle_message(message):
+    user_id = request.sid()
+    active_users[user_id] = True
+    socket_io.emit('message', {'data': 'connected!'}, room=user_id)
     print('received message : ', message)
-    socket_io.emit('message', message)
+    print('sid : ', user_id)
 
 if __name__ == '__main__':
     socket_io.run(app, debug=True, host='0.0.0.0', port=80)

@@ -1,4 +1,4 @@
-from main import X_train, y_train, X_test, y_test, nn
+from learning import X_train, y_train, X_test, y_test, nn
 import numpy as np
 import matplotlib.pyplot as plt
 import time
@@ -57,22 +57,23 @@ def show_test_predict():
     plt.tight_layout()
     plt.show()
 
-def show_user_img():
-    a = [-1. for _ in range(28)]
-    l = [1., 1., 1.] + [-1. for _ in range(25)]
-    r = [-1. for _ in range(25)] + [1., 1., 1.]
-    m = [-1. for _ in range(12)] + [1., 1., 1., 1.] + [-1. for _ in range(12)]
+def show_user_img(x):
+    # a = [-1. for _ in range(28)]
+    # l = [1., 1., 1.] + [-1. for _ in range(25)]
+    # r = [-1. for _ in range(25)] + [1., 1., 1.]
+    # m = [-1. for _ in range(12)] + [1., 1., 1., 1.] + [-1. for _ in range(12)]
 
-    # x = np.array([l, l, l] + [a for _ in range(22)] + [r, r, r])
-    x = np.array([a, a, a] + [m for _ in range(22)] + [a, a, a])
-    _x = x.flatten()
+    # # x = np.array([l, l, l] + [a for _ in range(22)] + [r, r, r])
+    # x = np.array([a, a, a] + [m for _ in range(22)] + [a, a, a])
+    # _x = x.flatten()
     print(x.shape)
     t1 = time.time()
-    print(nn.predict([_x])) # nn.predict([data, data, ...]), data.shape = (784,)
+    print(nn.predict([x])) # nn.predict([data, data, ...]), data.shape = (784,)
     print('predicting time : %d' % (time.time() - t1))
-    plt.imshow(x, cmap='Greys')
+    plt.imshow(x.reshape(28, 28), cmap='Greys')
     plt.show()
 
-# show_accuracy()
-# show_test_predict()
-show_user_img()
+if __name__ == '__main__':
+    # show_accuracy()
+    # show_test_predict()
+    show_user_img()
