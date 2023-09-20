@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import numpy as np
 from learning import nn
-from visuallization import show_user_img
+# from visuallization import show_user_img
 
 import random
 
