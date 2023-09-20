@@ -25,4 +25,4 @@ def handle_message(message):
     socket_io.emit('message', message)
 
 if __name__ == '__main__':
-    app.run()
+    socket_io.run(app, debug=True, host='0.0.0.0', port=80)
