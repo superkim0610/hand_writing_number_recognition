@@ -15,11 +15,12 @@ def index():
 
 @socketio.on('canvas_data')
 def handle_canvas_data(canvas_data):
-    print('Received canvas data:', canvas_data)  # 캔버스 데이터 출력
+    # print('Received canvas data:', canvas_data)  # 캔버스 데이터 출력
     canvas_data = np.array(canvas_data)
     canvas_data = ((canvas_data / 255.) - .5) * 2
     # show_user_img(canvas_data)
     result = int(nn.predict([canvas_data])[0])
+    print(result)
     # print(canvas_data)
     
     socketio.emit('number', {'number': result})
