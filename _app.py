@@ -25,16 +25,16 @@ def handle_disconnect():
 
 @socketio.on('canvas_data')
 def handle_canvas_data(canvas_data):
-    recipient_id = canvas_data['recipient_id']
+    session_id = canvas_data['sessionId']
     # print('Received canvas data:', canvas_data)  # 캔버스 데이터 출력
-    canvas_data = np.array(canvas_data)
+    canvas_data = np.array(canvas_data['canvas_data'])
     canvas_data = ((canvas_data / 255.) - .5) * 2
     # show_user_img(canvas_data)
     result = int(nn.predict([canvas_data])[0])
     print(result)
     # print(canvas_data)
     
-    socketio.emit('number', {'number': result}, room=recipient_id)
+    socketio.emit('number', {'number': result}, room=session_id)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=80)

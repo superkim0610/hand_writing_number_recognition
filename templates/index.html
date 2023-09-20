@@ -78,12 +78,13 @@
         function sendCanvasData() {
             var imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
             var canvas_data = [];
+            var sessionId = socket.id();
             for (var i = 0; i < imageData.length; i += 4) {
                 var pixelValue = imageData[i+3]
                 canvas_data.push(pixelValue);
 
             }
-            socket.emit('canvas_data', canvas_data);
+            socket.emit('canvas_data', {canvas_data: canvas_data, sessionId: sessionId});
             console.log(canvas_data);
         }
 
