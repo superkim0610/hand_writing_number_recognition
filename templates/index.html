@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>hand writing number recognition</h1>
-    <canvas id="canvas" width="28" height="28"></canvas>
+    <canvas id="canvas" width="280" height="280"></canvas>
     <br>
     <button onclick="clearCanvas()">erase</button>
     <button onclick="sendCanvasData()">send</button>
@@ -27,6 +27,7 @@
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
         var isDrawing = false;
+        context.lineWidth = 3;
 
         // 캔버스 초기화
         function clearCanvas() {

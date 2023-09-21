@@ -53,5 +53,5 @@ else:
         X_valid=X_train[55000:],
         y_valid=y_train[55000:]
         )
-    with open('model/nn.pickle', 'wb') as f:
+    with open('model/nn(l2=0001).pickle', 'wb') as f:
         pickle.dump(nn, f)
