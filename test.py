@@ -19,5 +19,5 @@ def minimalize(input_array):
             output_array[i, j] = int(np.mean(subblock))
 
     # print(output_array)
-    show_user_img(output_array.flatten())
+    # show_user_img(output_array.flatten())
     return output_array.flatten()
