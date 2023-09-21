@@ -1,5 +1,5 @@
 import numpy as np
-from visuallization import show_user_img
+# from visuallization import show_user_img
 
 def minimalize(input_array):
     n=280
